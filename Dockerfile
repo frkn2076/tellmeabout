@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json /app
 
-RUN npm install -g babel-cli@^7.0.0 -g --save
+RUN npm install -g babel-cli@^7.0.0
 
 RUN npm install
 
