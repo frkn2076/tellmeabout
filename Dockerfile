@@ -1,10 +1,10 @@
-FROM node:10
+FROM node:10-alpine
 
 WORKDIR /app
 
 COPY package.json /app
 
-RUN npm install @babel/cli@7.8.4
+RUN npm install -g babel-cli
 
 RUN npm install
 
