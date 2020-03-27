@@ -1,0 +1,46 @@
+version: "2.1"
+services:
+    api:
+        build: .
+        container_name: api
+        ports:
+            - "3000:3000"
+        links:
+            - db:db
+        environment:
+            NODE_ENV: development
+            PORT: 3306
+            DB_USERNAME: test
+            DB_PASSWORD: toortoor
+            DB_DATABASE: testdb
+            DB_HOSTNAME: db
+        networks:
+            - app-network
+        depends_on:
+            db:
+                condition: service_healthy
+
+    db:
+        container_name: db
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        ports:
+            - "3306:3306"
+        volumes:
+            - /var/lib/mysql
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+            MYSQL_USER: "test"
+            MYSQL_PASSWORD: "toortoor"
+            MYSQL_DATABASE: "testdb"
+            MYSQL_ROOT_PASSWORD: "toortoor"
+        networks:
+            - app-network
+        healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 20s
+            retries: 100
+
+networks:
+    app-network:
+        driver: bridge
