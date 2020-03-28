@@ -1,5 +1,5 @@
 import express from "express";
-import logger from './Common/Logger'
+//import logger from './Common/Logger'
 import bodyParser from "body-parser"
 //import {createUser,findUserByEmail} from './Repository/UserRepository'
 //import * as verdiginNaming from './Repository/UserRepository'
@@ -13,7 +13,7 @@ const port = 3000
 
 
 app.use(bodyParser.json())
-app.use(logger);
+//app.use(logger);
 
 app.use("/userInfo",UserInfoController)
 app.use("/login",LoginController)
